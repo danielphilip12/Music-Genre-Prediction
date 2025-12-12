@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Genre Prediction</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-info">
+    <div class="container">
+      <h1 class="display-1 text-center">Music Genre Prediction</h1>
+      <br />
+      <div class="row">
+        <div class="col-8">
+          <form
+            action="/predict"
+            method="POST"
+            class="bg-primary p-3 mb-2 rounded border border-danger"
+          >
+            <div class="row">
+              <div class="col-4">
+                <label for="energy" class="form-label text-light"
+                  >Energy:</label
+                >
+                <input
+                  type="number"
+                  name="energy"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="tempo" class="form-label text-light">Tempo:</label>
+                <input
+                  type="number"
+                  name="tempo"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="danceability" class="form-label text-light"
+                  >Danceability:</label
+                >
+                <input
+                  type="number"
+                  name="danceability"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="loudness" class="form-label text-light"
+                  >Loudness:</label
+                >
+                <input
+                  type="number"
+                  name="loudness"
+                  class="form-control"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="liveness" class="form-label text-light"
+                  >Liveness:</label
+                >
+                <input
+                  type="number"
+                  name="liveness"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="valence" class="form-label text-light"
+                  >Valence:</label
+                >
+                <input
+                  type="number"
+                  name="valence"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="speechiness" class="form-label text-light"
+                  >Speechiness:</label
+                >
+                <input
+                  type="number"
+                  name="speechiness"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="instrumentalness" class="form-label text-light"
+                  >Instrumentalnesst:</label
+                >
+                <input
+                  type="number"
+                  name="instrumentalness"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="mode" class="form-label text-light">Mode:</label>
+                <input
+                  type="number"
+                  name="mode"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <label for="key" class="form-label text-light">Key:</label>
+                <input
+                  type="number"
+                  name="key"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="duration_ms" class="form-label text-light"
+                  >Duration (ms):</label
+                >
+                <input
+                  type="number"
+                  name="duration_ms"
+                  class="form-control"
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="col-4">
+                <label for="acousticness" class="form-label text-light"
+                  >Acousticness:</label
+                >
+                <input
+                  type="number"
+                  name="acousticness"
+                  class="form-control"
+                  min="0"
+                  step="any"
+                  required
+                />
+              </div>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-success btn-lg col-12">
+              Predict
+            </button>
+          </form>
+        </div>
+        <div class="col-4">
+          {% if prediction_test %}
+          <div class="card bg-primary border border-danger">
+            <div class="card-body">
+              <h5 class="card-title">Prediction Result</h5>
+
+              <p
+                class="card-text display-6 bg-success p-3 mb-2 rounded text-white"
+              >
+                Prediced Music Genre: {{prediction_test }} ({{ probability }}% Positive)
+                <!-- The predicted house value is ${{ prediction_test }} -->
+              </p>
+            </div>
+            <div
+              class="card-footer text-body-secondary card-subtitle text-body-secondary"
+            >
+              NOTE: May predict different (but similar) genres. 
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
